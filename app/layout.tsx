@@ -1,5 +1,3 @@
-export const runtime = "edge";
-
 import "./globals.scss";
 
 export const metadata = {
