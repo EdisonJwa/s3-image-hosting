@@ -88,7 +88,11 @@ function PageData() {
     return (
       <div className="hero min-h-screen">
         <div className="hero-body flex flex-col items-center justify-center text-center">
-          <h1 className="title">Welcome to the Edison Network</h1>
+          <h1 className="title"
+            style={{
+              paddingBottom: "1rem",
+            }}
+          >Welcome to the Edison Network</h1>
           <p className="subtitle">You need to sign in to use this service.</p>
           <div className="flex items-center justify-center">
             <button
