@@ -21,7 +21,13 @@ export async function POST(request: Request) {
   }
   try {
     let finalURI = `${process.env.FINAL_URL}/${process.env.AWS_FILE_PATH}${newFilename}`;
-    const client = new S3Client({ region: process.env.AWS_REGION });
+    const client = new S3Client({ 
+      region: process.env.AWS_REGION, 
+      credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+      },
+    });
     const { url, fields } = await createPresignedPost(client, {
       Bucket: process.env.AWS_BUCKET_NAME,
       Key: process.env.AWS_FILE_PATH + newFilename,
