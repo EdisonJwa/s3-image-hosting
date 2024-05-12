@@ -1,3 +1,3 @@
-module.exports = {
-  output: "dist",
-};
+// module.exports = {
+//   distDir: "dist",
+// };
