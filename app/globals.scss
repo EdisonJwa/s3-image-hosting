@@ -1,0 +1,19 @@
+@charset "utf-8";
+@use "sass:color";
+@use "bulma/sass/utilities/derived-variables" with($link: #2275c9);
+@forward "bulma/sass/base";
+@forward "bulma/sass/components/message";
+@forward "bulma/sass/layout/hero";
+@forward "bulma/sass/form/file";
+@forward "bulma/sass/form/input-textarea";
+@forward "bulma/sass/elements/button";
+@forward "bulma/sass/elements/title";
+@forward "bulma/sass/elements/delete";
+@forward "bulma/sass/themes";
+@import "@unocss/reset/tailwind.css";
+@unocss all;
+
+body {
+    font-family: "Noto Sans", "Noto Sans SC", sans-serif;
+    font-display: optional;
+}
