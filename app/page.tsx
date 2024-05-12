@@ -1,5 +1,4 @@
 "use client";
-import { Session } from "inspector";
 import { SessionProvider, useSession, signIn, signOut } from "next-auth/react";
 
 import { useState } from "react";
@@ -94,7 +93,7 @@ function PageData() {
           <div className="flex items-center justify-center">
             <button
               onClick={() => {
-                signIn("edison-network-sso");
+                signIn("keycloak");
                 setSigninLoading(true);
               }}
               className={`button ${signinLoading ? "is-loading" : ""} `}

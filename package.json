@@ -20,7 +20,7 @@
     "eslint": "^8.0.0-0",
     "eslint-config-next": "14.2.3",
     "next": "^14.2.3",
-    "next-auth": "^4.24.7",
+    "next-auth": "beta",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "typescript": "5.4.5",

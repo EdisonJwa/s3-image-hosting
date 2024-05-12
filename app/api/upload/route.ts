@@ -2,13 +2,11 @@ import { createPresignedPost } from "@aws-sdk/s3-presigned-post";
 import { S3Client } from "@aws-sdk/client-s3";
 import { v4 as uuidv4 } from "uuid";
 
-import { useSession, getSession } from "next-auth/react";
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "../auth/[...nextauth]/index";
+import { auth } from "../../../auth"
 
 export async function POST(request: Request) {
   const { filename, contentType } = await request.json();
-  const session = await getServerSession();
+  const session = await auth()
   let ext = filename.split(".").pop();
   let newFilename = `${new Date()
     .toISOString()
