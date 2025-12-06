@@ -1,6 +1,11 @@
 import { betterAuth } from "better-auth";
 import { genericOAuth } from "better-auth/plugins";
 
+const keycloakIssuer = process.env.KEYCLOAK_ISSUER;
+if (!keycloakIssuer) {
+  throw new Error("KEYCLOAK_ISSUER environment variable is required");
+}
+
 export const auth = betterAuth({
   secret: process.env.BETTER_AUTH_SECRET || process.env.SECRET,
   baseURL: process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXTAUTH_URL,
@@ -19,7 +24,7 @@ export const auth = betterAuth({
           providerId: "keycloak",
           clientId: process.env.KEYCLOAK_ID || "",
           clientSecret: process.env.KEYCLOAK_SECRET || "",
-          discoveryUrl: `${process.env.KEYCLOAK_ISSUER}/.well-known/openid-configuration`,
+          discoveryUrl: `${keycloakIssuer}/.well-known/openid-configuration`,
           scopes: ["openid", "profile", "email"],
         },
       ],

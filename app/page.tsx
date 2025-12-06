@@ -98,9 +98,10 @@ function PageData() {
             <button
               onClick={async () => {
                 setSigninLoading(true);
+                const baseURL = process.env.NEXT_PUBLIC_BASE_URL || window.location.origin;
                 await authClient.signIn.social({ 
                   provider: "keycloak",
-                  callbackURL: window.location.origin,
+                  callbackURL: baseURL,
                 });
               }}
               className={`button ${signinLoading ? "is-loading" : ""} `}
