@@ -1,5 +1,5 @@
 "use client";
-import { SessionProvider, useSession, signIn, signOut } from "next-auth/react";
+import { authClient, useSession } from "../lib/auth-client";
 
 import { useState } from "react";
 
@@ -7,7 +7,7 @@ function PageData() {
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const [signinLoading, setSigninLoading] = useState(false);
-  const { data: session, status } = useSession();
+  const { data: session, isPending } = useSession();
   const [url, setUrl] = useState<string>("");
   const [uploadDone, setUploadDone] = useState(false);
   const [uploadStatus, setUploadStatus] = useState<string>("");
@@ -76,15 +76,14 @@ function PageData() {
 
     setUploading(false);
   };
-  console.log("session", session);
 
-  if (status === "loading") {
+  if (isPending) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center text-center">
         <p>Loading...</p>
       </div>
     );
-  } else if (!session || status === "unauthenticated") {
+  } else if (!session) {
     return (
       <div className="hero min-h-screen">
         <div className="hero-body flex flex-col items-center justify-center text-center">
@@ -96,9 +95,13 @@ function PageData() {
           <p className="subtitle">You need to sign in to use this service.</p>
           <div className="flex items-center justify-center">
             <button
-              onClick={() => {
-                signIn("keycloak");
+              onClick={async () => {
                 setSigninLoading(true);
+                const baseURL = process.env.NEXT_PUBLIC_BASE_URL || window.location.origin;
+                await authClient.signIn.social({ 
+                  provider: "keycloak",
+                  callbackURL: baseURL,
+                });
               }}
               className={`button ${signinLoading ? "is-loading" : ""} `}
               disabled={signinLoading}
@@ -293,7 +296,9 @@ function PageData() {
 
         <p>
           Logged in as {session.user.name}.{" "}
-          <button className="button is-small" onClick={() => signOut()}>
+          <button className="button is-small" onClick={async () => {
+            await authClient.signOut();
+          }}>
             Sign out?
           </button>
         </p>
@@ -311,11 +316,9 @@ function PageData() {
 
 export default function Page() {
   return (
-    <SessionProvider>
-      <main>
-        <PageData />
-      </main>
-    </SessionProvider>
+    <main>
+      <PageData />
+    </main>
   );
 }
 

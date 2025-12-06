@@ -1,12 +1,12 @@
 import { createPresignedPost } from "@aws-sdk/s3-presigned-post";
 import { S3Client } from "@aws-sdk/client-s3";
-import { v4 as uuidv4 } from "uuid";
+import { headers } from "next/headers";
 
-import { auth } from "../../../auth"
+import { auth } from "../../../lib/auth"
 
 export async function POST(request: Request) {
   const { filename, contentType } = await request.json();
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() });
   let ext = filename.split(".").pop();
   let newFilename = `${new Date()
     .toISOString()
