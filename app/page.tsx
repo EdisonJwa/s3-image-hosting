@@ -76,7 +76,6 @@ function PageData() {
 
     setUploading(false);
   };
-  console.log("session", session);
 
   if (isPending) {
     return (
