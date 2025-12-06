@@ -15,7 +15,6 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "aws-crt": "^1.27.5",
-    "aws-sdk": "^2.1692.0",
     "better-auth": "^1.4.5",
     "bulma": "^1.0.4",
     "encoding": "^0.1.13",
