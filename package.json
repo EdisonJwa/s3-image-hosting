@@ -19,7 +19,7 @@
     "better-auth": "^1.4.5",
     "bulma": "^1.0.4",
     "encoding": "^0.1.13",
-    "eslint": "^8.57.1",
+    "eslint": "^9.39.1",
     "eslint-config-next": "^16.0.7",
     "next": "^16.0.7",
     "react": "^19.2.1",
@@ -28,6 +28,7 @@
     "uuid": "^13.0.0"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.3",
     "@types/node": "^24.10.1",
     "@unocss/postcss": "^66.5.10",
     "@unocss/reset": "^66.5.10",
